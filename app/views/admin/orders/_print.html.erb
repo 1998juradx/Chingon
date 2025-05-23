@@ -1,0 +1,30 @@
+<div>
+  <button onclick="printReceipt([], false)">Caja</button>
+  <button onclick="printReceipt(<%= order.lines %>, false)">Comanda</button>
+  <button onclick="printReceipt(<%= order.lines(true) %>, true)">Recibo</button>
+
+  <script>
+    function printReceipt(lines, tray) {
+        console.log(lines)
+        const data = {
+            lines: lines.length > 0 ? lines : null,
+            tray: tray ? tray : false
+        };
+
+        fetch('http://localhost:3000/print', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    </script>
+</div>

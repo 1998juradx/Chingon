@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  total: 1.5
+  payment_method: one
+  status: 1
+
+two:
+  client: two
+  total: 1.5
+  payment_method: two
+  status: 1

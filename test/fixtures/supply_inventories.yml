@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supply: one
+  operation: 1
+  units: 1.5
+  status: 1
+
+two:
+  supply: two
+  operation: 1
+  units: 1.5
+  status: 1

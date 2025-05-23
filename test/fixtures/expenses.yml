@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  admin_user: one
+  payment_method: one
+  paid_at: 2024-03-12
+  invoice: MyString
+  status: 1
+
+two:
+  name: MyString
+  description: MyString
+  admin_user: two
+  payment_method: two
+  paid_at: 2024-03-12
+  invoice: MyString
+  status: 1
