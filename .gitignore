@@ -55,3 +55,6 @@ yarn-debug.log*
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+# Ignore Zone.Identifier files
+*:Zone.Identifier
