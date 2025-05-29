@@ -58,3 +58,5 @@ gem 'materialize-sass', '~> 1.0.0'
 gem 'font_awesome5_rails'
 
 gem 'rabl'
+
+gem "tailwindcss-rails", "~> 4.2"

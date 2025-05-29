@@ -58,3 +58,6 @@ Thumbs.db
 
 # Ignore Zone.Identifier files
 *:Zone.Identifier
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_15_160443) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_15_160443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "cost"
+    t.decimal "amount", precision: 10, scale: 2
     t.index ["admin_user_id"], name: "index_expenses_on_admin_user_id"
     t.index ["payment_method_id"], name: "index_expenses_on_payment_method_id"
   end
@@ -99,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_15_160443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "client_name"
+    t.datetime "order_date"
     t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["payment_method_id"], name: "index_orders_on_payment_method_id"
   end
@@ -129,6 +131,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_15_160443) do
     t.datetime "updated_at", null: false
     t.boolean "is_taco"
     t.integer "position"
+  end
+
+  create_table "providers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "email"
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "supplies", force: :cascade do |t|

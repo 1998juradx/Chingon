@@ -1,25 +1,15 @@
 ActiveAdmin.register Supply do
-
   menu parent: "Configuraciones", priority: 11
 
   permit_params :name, :unit, :status
 
   actions :all, except: [:destroy]
 
-  scope "Todos" do |m|
-    m.all
-  end
-
-  scope "Activos" do |m|
-    m.active
-  end
-
-  scope "Inactivos" do |m|
-    m.inactive
-  end
+  scope "Todos", :all
+  scope "Activos", :active
+  scope "Inactivos", :inactive
 
   index do
-    # selectable_column
     id_column
     column :name
     column :unit
@@ -28,13 +18,14 @@ ActiveAdmin.register Supply do
   end
 
   filter :name
+  filter :status, as: :select, collection: ["active", "inactive"]
 
   form do |f|
-    f.inputs "Detalles" do
+    f.inputs "Detalles del Insumo" do
       f.input :name
       f.input :unit
+      f.input :status, as: :select, collection: ["active", "inactive"], include_blank: false
     end
     f.actions
   end
-  
 end

@@ -1,33 +1,308 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
+es:
+  # -------------------- DEVISE --------------------
+  devise:
+    confirmations:
+      confirmed: "Tu dirección de correo electrónico ha sido confirmada exitosamente."
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo confirmar tu dirección de correo en unos minutos."
+      send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un correo con instrucciones sobre cómo confirmarla en unos minutos."
+    failure:
+      already_authenticated: "Ya estás conectado."
+      inactive: "Tu cuenta aún no ha sido activada."
+      invalid: "Email o contraseña inválidos."
+      locked: "Tu cuenta está bloqueada."
+      last_attempt: "Tienes un intento más antes de que tu cuenta sea bloqueada."
+      not_found_in_database: "Email o contraseña inválidos."
+      timeout: "Tu sesión ha expirado. Por favor, inicia sesión de nuevo para continuar."
+      unauthenticated: "Necesitas iniciar sesión o registrarte antes de continuar."
+      unconfirmed: "Debes confirmar tu dirección de correo electrónico antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrucciones de Confirmación - Chingón App"
+      reset_password_instructions:
+        subject: "Instrucciones para Restablecer Contraseña - Chingón App"
+      unlock_instructions:
+        subject: "Instrucciones de Desbloqueo - Chingón App"
+      email_changed:
+        subject: "Email Modificado - Chingón App"
+      password_change:
+        subject: "Contraseña Modificada - Chingón App"
+    omniauth_callbacks:
+      failure: "No pudimos autenticarte desde %{kind} debido a \"%{reason}\"."
+      success: "Autenticado exitosamente desde la cuenta %{kind}."
+    passwords:
+      no_token: "No puedes acceder a esta página sin provenir de un correo de restablecimiento de contraseña. Si vienes de un correo de restablecimiento, asegúrate de usar la URL completa."
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo restablecer tu contraseña en unos minutos."
+      send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un enlace de recuperación de contraseña en unos minutos."
+      updated: "Tu contraseña ha sido cambiada exitosamente. Ya estás conectado."
+      updated_not_active: "Tu contraseña ha sido cambiada exitosamente."
+    registrations:
+      destroyed: "¡Adiós! Tu cuenta ha sido cancelada exitosamente. Esperamos verte de nuevo pronto."
+      signed_up: "¡Bienvenido! Te has registrado exitosamente."
+      signed_up_but_inactive: "Te has registrado exitosamente. Sin embargo, no pudimos conectarte porque tu cuenta aún no está activada."
+      signed_up_but_locked: "Te has registrado exitosamente. Sin embargo, no pudimos conectarte porque tu cuenta está bloqueada."
+      signed_up_but_unconfirmed: "Se ha enviado un mensaje con un enlace de confirmación a tu dirección de correo electrónico. Por favor, sigue el enlace para activar tu cuenta."
+      update_needs_confirmation: "Actualizaste tu cuenta exitosamente, pero necesitamos verificar tu nueva dirección de correo. Por favor, revisa tu correo y sigue el enlace de confirmación."
+      updated: "Tu cuenta ha sido actualizada exitosamente."
+    sessions:
+      signed_in: "Sesión iniciada exitosamente."
+      signed_out: "Sesión cerrada exitosamente."
+      new:
+        sign_in: "Iniciar Sesión"
+        remember_me: "Recordarme"
+    unlocks:
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo desbloquear tu cuenta en unos minutos."
+      send_paranoid_instructions: "Si tu cuenta existe, recibirás un correo con instrucciones sobre cómo desbloquearla en unos minutos."
+      unlocked: "Tu cuenta ha sido desbloqueada exitosamente. Por favor, inicia sesión para continuar."
+    shared:
+      links:
+        sign_in: "Iniciar sesión"
+        forgot_your_password: "¿Olvidaste tu contraseña?"
+        create_an_account: "Crear una cuenta nueva"
+        confirmation_instructions: "¿No recibiste las instrucciones de confirmación?"
+        unlock_instructions: "¿No recibiste las instrucciones de desbloqueo?"
+        sign_in_with_provider: "Iniciar sesión con %{provider}"
+        or: "O"
 
-en:
-  hello: "Hello world"
+  # -------------------- ACTIVE ADMIN --------------------
+  active_admin:
+    dashboard: "Tablero Principal"
+    site_title: "Administración Chingón" # Nombre de tu app
+    logout: "Cerrar Sesión"
+    login: "Iniciar Sesión"
+    powered_by: "Desarrollado por %{active_admin} %{version}"
+    new_model: "Nuevo %{model}"
+    edit_model: "Editar %{model}"
+    delete_model: "Eliminar %{model}"
+    view: "Ver"
+    edit: "Editar"
+    delete: "Eliminar"
+    delete_confirmation: "¿Estás seguro de que quieres eliminar este elemento?"
+    filters:
+      buttons:
+        filter: "Filtrar"
+        clear_filters: "Limpiar Filtros"
+    batch_actions:
+      button_label: "Acciones en Lote"
+      default_action_confirm: "¿Estás seguro de que quieres hacer esto?"
+      delete_confirmation: "¿Estás seguro de que quieres eliminar estos %{plural_model}?"
+      succesfully_destroyed: # (o successfully_destroyed)
+        one: "Se eliminó exitosamente 1 %{model}"
+        other: "Se eliminaron exitosamente %{count} %{plural_model}" # Ajustado a plural_model
+    comments:
+      title: "Comentarios"
+      add: "Añadir Comentario"
+      no_comments_yet: "Aún no hay comentarios."
+      resource_type: "Tipo de Recurso"
+      author_type: "Tipo de Autor"
+      body: "Cuerpo"
+      author: "Autor"
+    scopes:
+      all: "Todos"
+    pagination:
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      first: "&laquo; Primero"
+      last: "Último &raquo;"
+      truncate: "…"
+      # Kaminari specific, Active Admin uses Kaminari
+      entry:
+        one: 'Mostrando 1 %{model}'
+        other: 'Mostrando los %{count} %{model}'
+        zero: 'No se encontró ningún %{model}'
+      more_pages:
+        display_entries: 'Mostrando %{first} - %{last} de %{total} %{entry_name}'
+
+
+  # -------------------- ACTIVERECORD (Tus Modelos) --------------------
+  activerecord:
+    models:
+      admin_user:
+        one: "Usuario Administrador"
+        other: "Usuarios Administradores"
+      employee:
+        one: "Empleado"
+        other: "Empleados"
+      payment_method:
+        one: "Método de Pago"
+        other: "Métodos de Pago"
+      supplier:
+        one: "Proveedor"
+        other: "Proveedores"
+      product:
+        one: "Producto"
+        other: "Productos"
+      order:
+        one: "Pedido"
+        other: "Pedidos"
+      order_product: # Para la tabla de unión
+        one: "Producto del Pedido"
+        other: "Productos del Pedido"
+      expense:
+        one: "Gasto"
+        other: "Gastos"
+      supply:
+        one: "Insumo"
+        other: "Insumos"
+      supply_inventory:
+        one: "Inventario de Insumo"
+        other: "Inventarios de Insumos"
+
+    attributes:
+      # General attributes often shared
+      id: "ID"
+      created_at: "Fecha de Creación"
+      updated_at: "Última Actualización"
+
+      admin_user:
+        email: "Correo Electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de Contraseña"
+        remember_me: "Recordarme"
+      employee:
+        name: "Nombre Completo"
+        phone: "Teléfono"
+        email: "Correo Electrónico"
+        # role: "Rol" # Si tuvieras un campo rol
+      payment_method:
+        name: "Nombre del Método"
+        # description: "Descripción"
+      supplier:
+        name: "Nombre del Proveedor"
+        phone: "Teléfono de Contacto"
+        email: "Email de Contacto"
+        address: "Dirección"
+      product:
+        name: "Nombre del Producto"
+        description: "Descripción"
+        price: "Precio de Venta"
+        # stock: "Existencias" # Si manejas stock de producto terminado
+        # code: "Código de Producto"
+        # status: "Estado"
+      order:
+        status: "Estado del Pedido" # (0: pendiente, 1: pagado, 2: cancelado)
+        total: "Monto Total"
+        order_date: "Fecha del Pedido"
+        # customer_name: "Nombre del Cliente" # Si lo tienes directamente en la orden
+        # payment_method_id: "Método de Pago"
+        # employee_id: "Atendido por"
+      order_product:
+        order: "Pedido"
+        product: "Producto"
+        quantity: "Cantidad"
+        price_at_order: "Precio al Ordenar"
+      expense:
+        supplier: "Proveedor"
+        amount: "Monto del Gasto"
+        description: "Descripción del Gasto"
+        expense_date: "Fecha del Gasto"
+      supply:
+        name: "Nombre del Insumo"
+        unit: "Unidad de Medida" # (kg, litro, pieza, etc.)
+        # category: "Categoría"
+      supply_inventory:
+        supply: "Insumo"
+        quantity: "Cantidad en Inventario"
+        purchase_date: "Fecha de Compra"
+        expiry_date: "Fecha de Caducidad"
+
+  # -------------------- ELEMENTOS DE UI PERSONALIZADOS --------------------
+  ui_elements:
+    access: "Panel de Control" # Cambié "Accesos" a algo más descriptivo si es el dashboard principal
+    configurations: "Configuraciones"
+    dashboard: "Tablero Principal" # Clave general para "Dashboard"
+    date_range_selector: "Selector de Rango de Fechas"
+    start_date: "Fecha de Inicio:"
+    end_date: "Fecha de Fin:"
+    submit_button: "Enviar"
+    todays_cashbox: "Caja del Día"
+
+  # -------------------- BOTONES --------------------
+  buttons:
+    submit: "Guardar" # O "Enviar" dependiendo del contexto
+    filter: "Filtrar"
+    cancel: "Cancelar"
+    new: "Nuevo"
+    edit: "Editar"
+    delete: "Eliminar"
+    back: "Volver"
+    sign_in: "Iniciar Sesión" # Para el botón de login
+
+  # -------------------- TRADUCCIONES PARA EL DASHBOARD PERSONALIZADO --------------------
+  active_admin_custom:
+    panels:
+      date_range_selector: "Seleccionar Rango de Fechas"
+      sales: "Ventas Totales"
+      clients: "Clientes Atendidos" # O "Pedidos Únicos"
+      tacos: "Tacos Vendidos" # Sé específico si puedes
+      broths: "Caldos Vendidos"
+      beers: "Cervezas Vendidas"
+      sodas: "Refrescos Vendidos"
+      general_settings: "Ajustes Generales"
+    labels:
+      date_1: "Desde: "
+      date_2: "Hasta: "
+
+  # -------------------- FORMATOS DE FECHA Y HORA --------------------
+  date:
+    formats:
+      default: "%d/%m/%Y" # dd/mm/yyyy
+      short: "%d de %b"   # ej. 28 de may
+      long: "%A, %d de %B de %Y" # ej. Miércoles, 28 de Mayo de 2025
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Dom, Lun, Mar, Mié, Jue, Vie, Sáb]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    order: # Para selectores de fecha
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d de %b %H:%M"
+      long: "%A, %d de %B de %Y, %H:%M:%S %Z"
+    am: "am"
+    pm: "pm"
+
+  # Para números, monedas, etc.
+  number:
+    format:
+      separator: "." # Separador de miles
+      delimiter: "," # Separador decimal
+      precision: 2
+      significant: false
+      strip_insignificant_zeros: false
+    currency:
+      format:
+        format: "%n %u" # o "%u%n"
+        unit: "MXN" # O tu moneda local, ej: "$"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+    percentage:
+      format:
+        delimiter: ""
+        precision: 2
+    precision:
+      format:
+        delimiter: ""
+
+  # Otros textos comunes
+  helpers:
+    select:
+      prompt: "Por favor seleccione"
+    submit:
+      create: 'Crear %{model}'
+      update: 'Actualizar %{model}'
+      submit: 'Guardar %{model}'
+
+  # Para errores de validación
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "debe ser aceptado"
+      blank: "no puede estar en blanco"
+      # ... (puedes encontrar la lista completa en la guía de i18n de Rails)

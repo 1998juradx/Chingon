@@ -8,15 +8,13 @@ Bundler.require(*Rails.groups)
 
 module Chingon
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
+    # Set defaults for Rails 7
     config.load_defaults 7.0
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
+    # Timezone (used for timestamps, etc.)
     config.time_zone = "America/Bogota"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.default_locale = :es
+    config.i18n.available_locales = [:es, :en] # O solo :es
+    config.i18n.fallbacks = true
   end
 end

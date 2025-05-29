@@ -141,7 +141,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  config.comments = false
+  # config.comments = false
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
@@ -160,7 +160,7 @@ ActiveAdmin.setup do |config|
   #
   # Enable and disable Batch Actions
   #
-  config.batch_actions = false
+  config.batch_actions = true
 
   # == Controller Filters
   #
@@ -349,10 +349,4 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
-
-     # Include a JavaScript library from a CDN
-     config.register_javascript 'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js'
-     config.register_javascript 'https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.3/angular-sanitize.min.js'
-     config.register_javascript 'admin/controllers/Main'
-     config.register_javascript 'admin/controllers/Orders'
 end

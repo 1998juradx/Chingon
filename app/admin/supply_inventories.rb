@@ -1,46 +1,41 @@
 ActiveAdmin.register SupplyInventory do
+  menu parent: "Inventario", priority: 1
 
-  permit_params :name, :unit, :status, :supply_id, :operation, :units, :cost
+  permit_params :supply_id, :operation, :units, :cost, :status
 
-  actions :all, except: [:show, :edit]
+  actions :all, except: [:show]
 
-  scope "Todos" do |m|
-    m.all
-  end
-
-  scope "Activos" do |m|
-    m.activo
-  end
-
-  scope "Anulados" do |m|
-    m.anulado
-  end
+  scope :all, default: true
+  scope("Entradas")   { |scope| scope.entrada }
+  scope("Salidas")    { |scope| scope.salida }
+  scope("Anulados")   { |scope| scope.anulado }
 
   index do
-    # selectable_column
     id_column
     column :supply
-    tag_column :operation, interactive: false
+    tag_column :operation
     column :units do |i|
       "#{i.units} #{i.supply&.unit}"
     end
     column :cost do |i|
-      number_to_currency i.cost, precision: 0
+      number_to_currency(i.cost, unit: "$", precision: 0)
     end
+    tag_column :status, interactive: true
     actions
   end
 
-  filter :name
-  filter :operation
+  filter :supply
+  filter :operation, as: :select, collection: SupplyInventory.operations.keys
+  filter :status, as: :select, collection: SupplyInventory.statuses.keys
 
   form do |f|
-    f.inputs "Detalles" do
+    f.inputs "Movimiento de Inventario" do
       f.input :supply
-      f.input :operation
+      f.input :operation, as: :select, collection: SupplyInventory.operations.keys
       f.input :units
       f.input :cost
+      f.input :status, as: :select, collection: SupplyInventory.statuses.keys
     end
     f.actions
   end
-  
 end
