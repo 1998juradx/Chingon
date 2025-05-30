@@ -31,6 +31,7 @@ end
 
 #ADMIN
 gem 'activeadmin'
+gem 'devise'
 gem 'activeadmin_addons'
 gem 'arctic_admin'
 gem 'cancan'
@@ -40,9 +41,6 @@ gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_c
 #GRAPHS
 gem 'groupdate'
 gem "chartkick"
-
-#SESSION
-gem 'devise'
 
 #ERRORS
 gem "sentry-ruby"
