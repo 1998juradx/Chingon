@@ -1,6 +1,3 @@
-# app/admin/Accesos.rb
-# frozen_string_literal: true
-
 ActiveAdmin.register_page "Accesos" do # <--- CAMBIO CLAVE: De "Dashboard" a "Accesos"
   # Ajusta la prioridad para que no colisione con el Dashboard real (si tienes uno en dashboard.rb)
   # Si este es tu dashboard principal y solo quieres que el menú "Accesos" lo apunte,

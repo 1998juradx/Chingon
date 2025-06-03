@@ -14,7 +14,7 @@ module Chingon
     # Timezone (used for timestamps, etc.)
     config.time_zone = "America/Bogota"
     config.i18n.default_locale = :es
-    config.i18n.available_locales = [:es, :en] # O solo :es
+    config.i18n.available_locales = [:es, :en]
     config.i18n.fallbacks = true
   end
 end

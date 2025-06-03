@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -75,8 +75,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
     t.datetime "updated_at", null: false
     t.float "cost"
     t.decimal "amount", precision: 10, scale: 2
+    t.integer "provider_id"
     t.index ["admin_user_id"], name: "index_expenses_on_admin_user_id"
     t.index ["payment_method_id"], name: "index_expenses_on_payment_method_id"
+    t.index ["provider_id"], name: "index_expenses_on_provider_id"
   end
 
   create_table "order_products", force: :cascade do |t|
@@ -87,7 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_id"
+    t.integer "order_id", null: false
     t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
@@ -101,6 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
     t.datetime "updated_at", null: false
     t.string "client_name"
     t.datetime "order_date"
+    t.decimal "total_price"
     t.index ["client_id"], name: "index_orders_on_client_id"
     t.index ["payment_method_id"], name: "index_orders_on_payment_method_id"
   end
@@ -129,7 +132,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_taco"
     t.integer "position"
   end
 
@@ -172,6 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_021605) do
 
   add_foreign_key "expenses", "admin_users"
   add_foreign_key "expenses", "payment_methods"
+  add_foreign_key "expenses", "providers"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "clients"

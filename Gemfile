@@ -29,7 +29,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-#ADMIN
 gem 'activeadmin'
 gem 'devise'
 gem 'activeadmin_addons'
@@ -38,11 +37,9 @@ gem 'cancan'
 gem 'cancancan'
 gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
 
-#GRAPHS
 gem 'groupdate'
 gem "chartkick"
 
-#ERRORS
 gem "sentry-ruby"
 gem "sentry-rails"
 
