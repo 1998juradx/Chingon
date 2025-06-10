@@ -38,14 +38,13 @@ ActiveAdmin.register Product do
               include_blank: "Sin prioridad específica",
               hint: "Número más bajo aparece primero. Define el orden en listas y menús."
 
-      # Input para 'status' (Asumiendo que tienes un enum 'status' en tu modelo Product)
-      # Ejemplo de enum en Product.rb: enum status: { activo: 0, inactivo: 1, agotado: 2 }
+      
       if defined?(Product.statuses) && Product.statuses.is_a?(Hash)
         f.input :status, 
                 label: "Estado del Producto", 
                 as: :select, 
                 collection: Product.statuses.map { |k, v| [k.humanize.titleize, k] }, # Muestra "Activo", "Inactivo"
-                include_blank: false # O true si puede estar sin estado inicial
+                include_blank: false
       else
         # Si no hay enum, pero tienes un campo status de texto o número simple:
         # f.input :status, label: "Estado (ej: activo, inactivo)"

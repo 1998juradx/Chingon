@@ -5,7 +5,7 @@ class Provider < ApplicationRecord
             presence: { message: "El nombre del proveedor no puede estar en blanco." },
             length: { 
               minimum: 3, 
-              maximum: 150,
+              maximum: 50,
               too_short: "El nombre del proveedor debe tener al menos %{count} caracteres.",
               too_long: "El nombre del proveedor no puede tener más de %{count} caracteres." 
             },
@@ -29,7 +29,7 @@ class Provider < ApplicationRecord
             presence: { message: "El teléfono del proveedor no puede estar en blanco." },
             length: { 
               minimum: 7,
-              maximum: 20,
+              maximum: 10,
               message: "El teléfono debe tener una longitud válida (7-20 caracteres)."
             },
             format: { 
@@ -41,7 +41,7 @@ class Provider < ApplicationRecord
             presence: { message: "La dirección del proveedor no puede estar en blanco." },
             length: { 
               minimum: 10, 
-              maximum: 255,
+              maximum: 200,
               too_short: "La dirección debe tener al menos %{count} caracteres.",
               too_long: "La dirección no puede tener más de %{count} caracteres."
             }

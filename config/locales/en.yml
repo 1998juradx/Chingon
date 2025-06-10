@@ -95,7 +95,7 @@ es:
   activerecord:
     errors:
       messages:
-        record_invalid: "La validación falló: %{errors}" # <--- CLAVE IMPORTANTE
+        record_invalid: "La validación falló: %{errors}" # Asegurada su correcta ubicación
     models:
       admin_user:
         one: "Usuario Administrador"
@@ -181,7 +181,7 @@ es:
       product:
         name: "Nombre del Producto"
         price: "Precio Venta (COP)"
-        is_taco: "¿Es Taco?"
+        is_taco: "¿Es Taco?" # Aunque ya no lo uses, lo dejo por si acaso o para otros modelos
         position: "Posición/Orden"
         description: "Descripción del Producto"
       provider:
@@ -192,6 +192,7 @@ es:
       supply:
         name: "Nombre del Insumo"
         unit: "Unidad de Medida"
+        status: "Estado del Insumo" # Añadido para consistencia si Supply tiene status
       supply_inventory:
         supply: "Insumo"
         units: "Cantidad en Inventario"
@@ -216,15 +217,15 @@ es:
       unconfirmed: "Debes confirmar tu dirección de correo electrónico antes de continuar."
     mailer:
       confirmation_instructions:
-        subject: "Instrucciones de Confirmación - Chingonería"
+        subject: "Instrucciones de Confirmación - Chingon" # Ajustado a Chingon
       reset_password_instructions:
-        subject: "Instrucciones para Restablecer Contraseña - Chingonería"
+        subject: "Instrucciones para Restablecer Contraseña - Chingon"
       unlock_instructions:
-        subject: "Instrucciones de Desbloqueo - Chingonería"
+        subject: "Instrucciones de Desbloqueo - Chingon"
       email_changed:
-        subject: "Correo Electrónico Modificado - Chingonería"
+        subject: "Correo Electrónico Modificado - Chingon"
       password_change:
-        subject: "Contraseña Modificada - Chingonería"
+        subject: "Contraseña Modificada - Chingon"
     omniauth_callbacks:
       failure: "No pudimos autenticarte desde %{kind} debido a: \"%{reason}\"."
       success: "Autenticado exitosamente desde la cuenta %{kind}."
@@ -264,7 +265,7 @@ es:
 
   active_admin:
     dashboard: "Tablero Principal"
-    site_title: "Chingonería - Administración"
+    site_title: "Chingon - Administración" # Ajustado a Chingon
     logout: "Cerrar Sesión"
     login: "Acceso Admin"
     powered_by: "Desarrollado con Active Admin %{version}"
@@ -283,7 +284,7 @@ es:
       button_label: "Acciones en Lote"
       default_action_confirm: "¿Estás seguro de ejecutar esta acción sobre los elementos seleccionados?"
       delete_confirmation: "¿Estás seguro de que quieres eliminar los %{plural_model} seleccionados?"
-      succesfully_destroyed:
+      succesfully_destroyed: # O successfully_destroyed
         one: "Se eliminó 1 %{model}."
         other: "Se eliminaron %{count} %{plural_model}."
     comments:

@@ -53,7 +53,10 @@ while empleados_creados < 10
   nombre_empleado = Faker::Name.unique.name_with_middle
   next unless nombre_empleado.present? && nombre_empleado.match?(regex_nombre_valido_emp)
   telefono_col = "3#{Faker::Number.leading_zero_number(digits: 9)}"
-  email_emp = Faker::Internet.unique.email(name: "#{nombre_empleado.split.first.downcase.gsub(/\W/, '')}.#{empleados_creados + 1}", domain: 'chingon.com.co')
+  email_emp = Faker::Internet.unique.email(
+    name: "#{nombre_empleado.split.first.downcase.gsub(/\W/, '')}.#{empleados_creados + 1}",
+    domain: 'chingon.com.co'
+  )
   Employee.find_or_create_by!(email: email_emp) do |emp|
     emp.name = nombre_empleado
     emp.phone = telefono_col
@@ -73,8 +76,12 @@ puts "\nCreando 15 Proveedores..."
 Faker::Company.unique.clear
 Faker::Internet.unique.clear
 nombres_proveedores_manizales = [
-  "Surtifruver La Montaña (Manizales)", "Carnes Premium del Eje", "Tortillería El Sol Naciente",
-  "Lácteos Frescos de Caldas", "Distribuidora de Chiles 'Picante Mágico'", "Abarrotes 'El Cafetero'"
+  "Surtifruver La Montaña (Manizales)",
+  "Carnes Premium del Eje",
+  "Tortillería El Sol Naciente",
+  "Lácteos Frescos de Caldas",
+  "Distribuidora de Chiles 'Picante Mágico'",
+  "Abarrotes 'El Cafetero'"
 ]
 (15 - nombres_proveedores_manizales.length).times do |i|
   nombres_proveedores_manizales << "#{Faker::Company.unique.name} #{['S.A.S.', 'Ltda.', 'Dist. Manizales'].sample}"
@@ -83,7 +90,10 @@ nombres_proveedores_manizales.each_with_index do |nombre_proveedor, i|
   Provider.create!(
     name: nombre_proveedor.gsub(/#+\d*/, '').strip,
     phone: "606#{Faker::Number.number(digits: 7)}",
-    email: Faker::Internet.unique.email(name: "#{nombre_proveedor.split.first.downcase.gsub(/\W/, '')}.#{i}", domain: 'proveedor.mzl.co'),
+    email: Faker::Internet.unique.email(
+      name: "#{nombre_proveedor.split.first.downcase.gsub(/\W/, '')}.#{i}",
+      domain: 'proveedor.mzl.co'
+    ),
     address: "#{Faker::Address.street_name} ##{Faker::Address.building_number}, Manizales"
   )
 end
@@ -91,32 +101,46 @@ puts "#{Provider.count} proveedores creados."
 
 puts "\nCreando Insumos..."
 Faker::Food.unique.clear
+posibles_estados_insumo = Supply.statuses.keys if defined?(Supply.statuses) && Supply.statuses.is_a?(Hash)
+posibles_estados_insumo ||= [:activo, :inactivo]
 insumos_data = [
-  { name: "Tortilla de Maíz (Tacos)", unit: "kg" }, { name: "Tortilla de Harina (Burritos)", unit: "docena" },
-  { name: "Carne al Pastor", unit: "kg" }, { name: "Bistec de Res", unit: "kg" },
-  { name: "Pechuga de Pollo", unit: "kg" }
+  { name: "Tortilla de Maíz (Tacos)", unit: "kg", status: posibles_estados_insumo.sample },
+  { name: "Tortilla de Harina (Burritos)", unit: "docena", status: posibles_estados_insumo.sample },
+  { name: "Carne al Pastor", unit: "kg", status: posibles_estados_insumo.sample },
+  { name: "Bistec de Res", unit: "kg", status: posibles_estados_insumo.sample },
+  { name: "Pechuga de Pollo", unit: "kg", status: posibles_estados_insumo.sample }
 ]
-insumos_data.each do |insumo|
-  Supply.find_or_create_by!(name: insumo[:name]) do |s|
-    s.unit = insumo[:unit]
+insumos_data.each do |insumo_attrs|
+  Supply.find_or_create_by!(name: insumo_attrs[:name]) do |s|
+    s.unit = insumo_attrs[:unit]
+    s.status = insumo_attrs[:status]
   end
 end
+binding.pry
+puts "#{insumos_data.length} insumos predefinidos creados."
+
 unidades_comunes = ["kg", "litro", "unidad", "atado", "bolsa", "paquete", "lata"]
+puts "\nCreando 10 insumos adicionales con Faker..."
 10.times do |i|
   nombre_insumo_faker = "#{Faker::Food.ingredient.capitalize} #{Faker::Color.color_name.capitalize} ##{i + 1}"
   Supply.find_or_create_by!(name: nombre_insumo_faker) do |s|
     s.unit = unidades_comunes.sample
+    s.status = posibles_estados_insumo.sample
   end
 end
+binding.pry
 minimo_total_insumos = 20
 if Supply.count < minimo_total_insumos
+  puts "\nAsegurando un mínimo de #{minimo_total_insumos} insumos en total..."
   while Supply.count < minimo_total_insumos
     nombre_insumo_extra_faker = "#{Faker::Food.spice.capitalize} #{Faker::Adjective.positive.capitalize} ##{Supply.count + 1}"
     Supply.find_or_create_by!(name: nombre_insumo_extra_faker) do |s|
       s.unit = unidades_comunes.sample
+      s.status = posibles_estados_insumo.sample
     end
   end
 end
+binding.pry
 puts "\nTotal de #{Supply.count} insumos creados."
 
 puts "\nCreando Inventario de Insumos..."
@@ -125,7 +149,6 @@ num_inventarios_a_crear = [15, todos_los_insumos.length].min
 insumos_para_inventario = todos_los_insumos.empty? ? [] : todos_los_insumos.sample(num_inventarios_a_crear)
 operaciones_validas = defined?(SupplyInventory.operations) && SupplyInventory.operations.is_a?(Hash) ? SupplyInventory.operations.keys : [:entrada, :salida]
 estados_inventario_validos = defined?(SupplyInventory.statuses) && SupplyInventory.statuses.is_a?(Hash) ? SupplyInventory.statuses.keys : [:activo, :anulado]
-
 insumos_para_inventario.each do |insumo_sample|
   SupplyInventory.find_or_create_by!(supply: insumo_sample) do |inv|
     inv.units = Faker::Number.between(from: 5.0, to: 100.0).round(1)
@@ -134,6 +157,8 @@ insumos_para_inventario.each do |insumo_sample|
     inv.status = estados_inventario_validos.sample
   end
 end
+binding.pry
+
 puts "#{SupplyInventory.count} registros de inventario creados."
 
 puts "\nCreando al menos 15 Productos (Comida Mexicana)..."
@@ -141,9 +166,8 @@ Faker::Coffee.unique.clear
 Faker::Number.unique.clear
 Faker::Adjective.unique.clear
 Faker::Food.unique.clear
-
 productos_data = [
-  { name: "Tacos al Pastor (Orden de 3)", price: 16000 }, # is_taco eliminado
+  { name: "Tacos al Pastor (Orden de 3)", price: 16000 },
   { name: "Tacos de Asada (Orden de 3)", price: 17000 },
   { name: "Tacos de Carnitas (Orden de 3)", price: 16500 },
   { name: "Tacos de Pollo Adobado (Orden de 3)", price: 15000 },
@@ -154,27 +178,24 @@ productos_data = [
 num_productos_adicionales = 15 - productos_data.length
 if num_productos_adicionales > 0
   num_productos_adicionales.times do
-    nombres_base_producto_mexicano = ["Tostada", "Sope", "Gordita", "Flauta", "Huarache", "Pambazo", "Mollete", "Taco", "Burrito", "Quesadilla", "Enchilada"]
+    nombres_base_producto_mexicano = [
+      "Tostada", "Sope", "Gordita", "Flauta",
+      "Huarache", "Pambazo", "Mollete", "Taco",
+      "Burrito", "Quesadilla", "Enchilada"
+    ]
     nombre_producto_faker = "#{nombres_base_producto_mexicano.sample} de #{Faker::Food.ingredient.capitalize} #{Faker::Adjective.positive.capitalize} ##{Product.count + 1}"
     nombre_producto_faker = "#{nombre_producto_faker} (v#{Faker::Number.digit})" if Product.exists?(name: nombre_producto_faker)
-    
     productos_data << {
       name: nombre_producto_faker,
       price: Faker::Number.between(from: 1000, to: 35000).round(-2)
-      # is_taco eliminado
     }
   end
 end
-
 productos_data.each do |prod_data|
   precio_final = prod_data[:price]
   precio_final = 1000 if precio_final.nil? || precio_final <= 0
   Product.find_or_create_by!(name: prod_data[:name]) do |product|
     product.price = precio_final
-    # product.is_taco = prod_data.fetch(:is_taco, false) # Línea eliminada
-    # Si tienes un campo 'position' o 'status' para Product y quieres asignarlo en los seeds:
-    # product.position = prod_data[:position] || Product.count + 1 # Ejemplo para posición
-    # product.status = :activo # Ejemplo si tienes enum status: { activo: 0, ... }
   end
 end
 puts "\nTotal de #{Product.count} productos creados."
@@ -231,8 +252,10 @@ puts "\nCreando 15 Gastos..."
 todos_los_admin_users = AdminUser.all.to_a
 descripciones_gastos_manizales = [
   "Arriendo local #{I18n.t('date.month_names', locale: :es, default: ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'])[Faker::Number.between(from: 1, to: 12)]}",
-  "Servicios públicos (CHEC, Aguas Manizales)", "Nómina quincena", "Compra papelería",
-  "Mantenimiento cocina", "Publicidad local", "Transporte insumos", "Gas propano"
+  "Servicios públicos (CHEC, Aguas Manizales)",
+  "Nómina quincena", "Compra papelería",
+  "Mantenimiento cocina", "Publicidad local",
+  "Transporte insumos", "Gas propano"
 ]
 status_gasto_options = [0, 1]
 15.times do |i|

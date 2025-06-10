@@ -17,6 +17,7 @@ gem "sassc-rails"
 gem 'faker'
 
 group :development, :test do
+  gem 'pry', '~> 0.15.2'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 

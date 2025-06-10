@@ -22,7 +22,7 @@ class Product < ApplicationRecord
             uniqueness: { case_sensitive: false, message: "Ese nombre de producto ya existe." },
             length: { 
               minimum: 3, 
-              maximum: 100,
+              maximum: 50,
               too_short: "El nombre debe tener al menos %{count} caracteres.",
               too_long: "El nombre no puede tener más de %{count} caracteres."
             },

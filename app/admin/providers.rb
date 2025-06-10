@@ -16,7 +16,7 @@ ActiveAdmin.register Provider do # Asegúrate que el nombre del modelo sea Provi
     column "Correo Electrónico", :email
     column "Teléfono", :phone
     column "Dirección", :address
-    column "Registrado el", :created_at # Es útil ver cuándo se creó
+    column "Registrado el", :created_at # Ver cuándo se creó
     actions # Muestra los botones de Ver, Editar, Eliminar
   end
 
