@@ -1,6 +1,5 @@
-class AddOrderAndProductToOrderProducts < ActiveRecord::Migration[6.1]
+class AddOrderAndProductToOrderProducts < ActiveRecord::Migration[7.0]
   def change
-    add_reference :order_products, :order, null: false, foreign_key: true
-    # NO AGREGUES product_id porque ya existe
+    puts ">>> Migración 20231207183124: Omitiendo acción para evitar conflictos. <<<"
   end
 end

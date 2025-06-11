@@ -15,6 +15,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "sassc-rails"
 gem 'faker'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development, :test do
   gem 'pry', '~> 0.15.2'

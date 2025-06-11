@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
   has_many :orders, dependent: :destroy
+  has_many :debts, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   enum status: { activo: 0, inactivo: 1, potencial: 2, vip: 3 }
 
@@ -10,11 +12,11 @@ class Client < ApplicationRecord
               maximum: 100,
               too_short: "El nombre debe tener al menos %{count} letras.",
               too_long: "El nombre no puede tener más de %{count} letras." 
-            },
-            format: { 
-              with: /\A[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+\z/,
-              message: "El nombre solo puede contener letras, espacios, apóstrofes o guiones."
-            }
+            }#,
+            #format: { 
+            #  with: /\A[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+\z/,
+            #  message: "El nombre solo puede contener letras, espacios, apóstrofes o guiones."
+            #}
 
   validates :email,
             presence: { message: "El correo electrónico no puede estar en blanco." },

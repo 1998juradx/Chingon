@@ -1,4 +1,6 @@
 class AdminUser < ApplicationRecord
+  has_many :debts, dependent: :destroy
+  has_many :payments, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, 

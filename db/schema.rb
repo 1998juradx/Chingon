@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_11_000120) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -55,6 +55,27 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "debts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "client_id", null: false
+    t.integer "installments"
+    t.integer "due_day"
+    t.date "start_at"
+    t.date "end_at"
+    t.float "interest_rate"
+    t.decimal "amount"
+    t.decimal "quota"
+    t.string "currency"
+    t.string "token"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "admin_user_id"
+    t.index ["admin_user_id"], name: "index_debts_on_admin_user_id"
+    t.index ["client_id"], name: "index_debts_on_client_id"
+    t.index ["user_id"], name: "index_debts_on_user_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "phone"
@@ -89,8 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_id", null: false
-    t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
@@ -115,6 +134,33 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "debt_id", null: false
+    t.integer "client_id", null: false
+    t.integer "user_id", null: false
+    t.decimal "amount"
+    t.decimal "min_amount"
+    t.datetime "due_at"
+    t.string "currency"
+    t.integer "installment"
+    t.float "discount"
+    t.integer "status"
+    t.decimal "interest_amount"
+    t.decimal "paid_amount"
+    t.datetime "discounted_at"
+    t.datetime "paid_at"
+    t.decimal "default_interest_amount"
+    t.decimal "paid_interest_amount"
+    t.decimal "paid_default_interest_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "admin_user_id"
+    t.index ["admin_user_id"], name: "index_payments_on_admin_user_id"
+    t.index ["client_id"], name: "index_payments_on_client_id"
+    t.index ["debt_id"], name: "index_payments_on_debt_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "product_supplies", force: :cascade do |t|
     t.integer "product_id"
     t.integer "supply_id"
@@ -133,6 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position"
+    t.string "picture"
   end
 
   create_table "providers", force: :cascade do |t|
@@ -172,13 +219,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_03_150731) do
     t.index ["supply_id"], name: "index_supply_inventories_on_supply_id"
   end
 
+  add_foreign_key "debts", "clients"
+  add_foreign_key "debts", "users"
   add_foreign_key "expenses", "admin_users"
   add_foreign_key "expenses", "payment_methods"
   add_foreign_key "expenses", "providers"
-  add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "clients"
   add_foreign_key "orders", "payment_methods"
+  add_foreign_key "payments", "clients"
+  add_foreign_key "payments", "debts"
+  add_foreign_key "payments", "users"
   add_foreign_key "product_supplies", "products"
   add_foreign_key "product_supplies", "supplies"
   add_foreign_key "supply_costs", "supplies"

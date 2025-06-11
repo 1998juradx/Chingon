@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  client: one
+  installments: 1
+  due_day: 1
+  start_at: 2025-06-10
+  end_at: 2025-06-10
+  interest_rate: 1.5
+  amount: 9.99
+  quota: 9.99
+  currency: MyString
+  token: MyString
+  status: 1
+
+two:
+  user: two
+  client: two
+  installments: 1
+  due_day: 1
+  start_at: 2025-06-10
+  end_at: 2025-06-10
+  interest_rate: 1.5
+  amount: 9.99
+  quota: 9.99
+  currency: MyString
+  token: MyString
+  status: 1
