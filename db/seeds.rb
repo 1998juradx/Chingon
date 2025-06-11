@@ -5,83 +5,65 @@ Payment.destroy_all
 Debt.destroy_all
 Client.destroy_all
 AdminUser.destroy_all
+User.destroy_all
 puts "Limpiando tablas para el reporte PDF..."
 
 puts "\nCreando Usuarios Administradores y Clientes de ejemplo..."
-usuario_registrador = AdminUser.find_or_create_by!(email: 'admin@rocasol.com.co') do |admin|
-  admin.password = "password123"
-  admin.password_confirmation = "password123"
-end
-
-clientes_de_prueba = []
-10.times do
-  # 1. Genera un nombre de persona (que no tiene comas)
-  nombre_valido = Faker::Name.name 
-  
-  # 2. Genera un teléfono con el formato correcto
-  telefono_valido = "3#{Faker::Number.number(digits: 9)}"
-  
-  # 3. Asigna un estado válido del enum que tienes en tu modelo Client
-  estado_valido = [:activo, :inactivo, :potencial, :vip].sample
-
-  clientes_de_prueba << Client.create!(
-    name: nombre_valido,
-    phone: telefono_valido,
-    email: Faker::Internet.unique.email,
-    status: estado_valido
+15.times do |i|
+  a = AdminUser.new(
+    email: "#{i}-#{Faker::Internet.unique.email}",
+    password: "password123",
+    password_confirmation: "password123",
+    name: Faker::Name.name,
+    phone: Faker::PhoneNumber.phone_number
   )
+  a.save
+  puts "Usuario administrador #{a.id} creado con éxito #{a.email}"
 end
-puts "#{AdminUser.count} usuario administrador y #{Client.count} clientes creados."
 
-
-puts "\nCreando 15 Deudas y sus Pagos..."
+puts "Iniciando Creación de 15 Usuarios..."
 15.times do
-  cliente_actual = clientes_de_prueba.sample
-  usuario_actual = usuario_registrador # Solo hay un admin, así que lo usamos siempre
-  
-  monto_deuda = Faker::Number.between(from: 500, to: 10000) * 1000
-  num_cuotas = [6, 12, 18, 24].sample
-  valor_cuota = (monto_deuda.to_f / num_cuotas) * 1.15
-  fecha_inicio = Faker::Date.between(from: 1.year.ago, to: 8.months.ago)
-binding.pry
-
-  nueva_deuda = Debt.new(
-    client_id: Client.last.id,
-    admin_user_id: AdminUser.last.id,
-    installments: num_cuotas,
-    due_day: 15,
-    start_at: fecha_inicio,
-    end_at: fecha_inicio + num_cuotas.months,
-    interest_rate: 2.1,
-    amount: monto_deuda,
-    quota: valor_cuota.round(-2),
-    currency: 'COP',
-    token: SecureRandom.hex(10),
-    status: 0
+  u = User.new(
+    name: Faker::Name.name,
+    lastname: Faker::Name.last_name
   )
-
-  pagos_a_crear = rand(1..5)
-  pagos_a_crear.times do |i|
-    fecha_de_pago = fecha_inicio + (i + 1).months
-    break if fecha_de_pago > Date.today
-
-    nueva_deuda.payments.create!(
-      client: cliente_actual,
-      admin_user: usuario_actual,
-      amount: nueva_deuda.quota,
-      payment_date: fecha_de_pago,
-      status: :aplicado,
-      receipt_number: "REC-#{Faker::Number.number(digits: 4)}",
-      due_at: fecha_de_pago,
-      currency: 'COP',
-      installment: i + 1,
-      discount: 0,
-      interest_amount: 0,
-      paid_amount: nueva_deuda.quota,
-      min_amount: nueva_deuda.quota
-    )
-  end
-  puts "Deuda ##{nueva_deuda.id} creada para #{cliente_actual.name} con #{nueva_deuda.payments.count} pagos."
+  u.save
+  puts "Usuario #{u.id} creado con éxito #{u.name} #{u.lastname}"
 end
+puts "Terminado Creación de 15 Usuarios"
+puts "Iniciando Creación de 10 Clientes..."
+10.times do |i|
+  c = Client.new(
+    name: "#{Faker::Name.name}",
+    phone: "3#{Faker::Number.number(digits: 9)}",
+    email: "#{i}-#{Faker::Internet.unique.email}",
+    status: [0, 1, 2, 3].sample
+  )
+  c.save
+  puts "Cliente #{c.id} creado con éxito #{c.name} #{c.phone} #{c.email} #{c.status}"
+end
+puts "Terminado Creación de 10 Clientes"
+
+puts "Iniciando Creación de 10 Deudas..."
+10.times do |i|
+  d = Debt.new(
+    client_id: Client.pluck(:id).sample,
+    user_id: User.pluck(:id).sample,
+    installments: [12, 24, 36, 48, 60].sample,
+    due_day: [1, 15, 30].sample,
+    start_at: Date.today,
+    end_at: Date.today + [12, 24, 36, 48, 60].sample.months,
+    interest_rate: 0.1,
+    amount: [1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000].sample,
+    quota: [100000, 200000, 300000, 400000, 500000].sample,
+    currency: "COP",
+    token: SecureRandom.hex(10),
+    status: [0, 1, 2].sample,
+    admin_user_id: AdminUser.pluck(:id).sample
+  )
+  d.save
+  puts "Deuda #{d.id} creada con éxito #{d.client_id} #{d.user_id} #{d.installments} #{d.due_day} #{d.start_at} #{d.end_at} #{d.interest_rate} #{d.amount} #{d.quota} #{d.currency} #{d.token} #{d.status}"
+end
+puts "Terminado Creación de 10 Deudas"
 
 puts "\n¡Seeds mínimos para PDF completados!"

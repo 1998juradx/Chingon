@@ -219,6 +219,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_11_000120) do
     t.index ["supply_id"], name: "index_supply_inventories_on_supply_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "lastname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "debts", "clients"
   add_foreign_key "debts", "users"
   add_foreign_key "expenses", "admin_users"
