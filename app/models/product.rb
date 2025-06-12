@@ -40,7 +40,8 @@ class Product < ApplicationRecord
   
   # validates :status, presence: { message: "Debe seleccionar un estado para el producto." } # Si usas status
   # validates :position, presence: { message: "Debe seleccionar una posición." } # Si position es obligatorio
-
+  mount_uploader :picture, ImageUploader
+  
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "name", "price", "position", "status", "updated_at"] # 'is_taco' eliminado
   end

@@ -17,6 +17,8 @@ gem "sassc-rails"
 gem 'faker'
 gem 'prawn'
 gem 'prawn-table'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'pry', '~> 0.15.2'

@@ -1,7 +1,7 @@
 class Debt < ApplicationRecord
   #belongs_to :admin_user
   #belongs_to :client
-  #has_many :payments, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   #accepts_nested_attributes_for :payments, allow_destroy: true
 
