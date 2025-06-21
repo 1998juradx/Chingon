@@ -1,33 +1,372 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
+es:
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %b"
+      long: "%A, %d de %B de %Y"
+    day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
+    abbr_day_names: [Dom, Lun, Mar, Mié, Jue, Vie, Sáb]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
+    order:
+      - :day
+      - :month
+      - :year
 
-en:
-  hello: "Hello world"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d de %b, %H:%M"
+      long: "%A, %d de %B de %Y, %H:%M:%S %Z"
+    am: "am"
+    pm: "pm"
+
+  number:
+    format:
+      separator: ","
+      delimiter: "."
+      precision: 2
+      significant: false
+      strip_insignificant_zeros: false
+    currency:
+      format:
+        unit: "COP"
+        format: "%u %n"
+        separator: ","
+        delimiter: "."
+        precision: 0
+        significant: false
+        strip_insignificant_zeros: true
+    percentage:
+      format:
+        delimiter: ""
+        precision: 2
+    precision:
+      format:
+        delimiter: ""
+
+  helpers:
+    select:
+      prompt: "Por favor, seleccione una opción"
+    submit:
+      create: 'Crear %{model}'
+      update: 'Actualizar %{model}'
+      submit: 'Guardar %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "debe ser aceptado."
+      blank: "no puede estar en blanco."
+      confirmation: "no coincide con %{attribute}."
+      empty: "no puede estar vacío."
+      equal_to: "debe ser igual a %{count}."
+      even: "debe ser un número par."
+      exclusion: "está reservado."
+      greater_than: "debe ser mayor que %{count}."
+      greater_than_or_equal_to: "debe ser mayor o igual a %{count}."
+      inclusion: "no está incluido en la lista."
+      invalid: "no es válido."
+      less_than: "debe ser menor que %{count}."
+      less_than_or_equal_to: "debe ser menor o igual a %{count}."
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: "no es un número."
+      not_an_integer: "debe ser un número entero."
+      odd: "debe ser un número impar."
+      other_than: "debe ser diferente de %{count}."
+      present: "debe estar en blanco."
+      required: "debe existir."
+      taken: "ya ha sido tomado (ya existe)."
+      too_long:
+        one: "es demasiado largo (máximo 1 carácter)."
+        other: "es demasiado largo (máximo %{count} caracteres)."
+      too_short:
+        one: "es demasiado corto (mínimo 1 carácter)."
+        other: "es demasiado corto (mínimo %{count} caracteres)."
+      wrong_length:
+        one: "no tiene la longitud correcta (debe ser 1 carácter)."
+        other: "no tiene la longitud correcta (debe ser de %{count} caracteres)."
+    template:
+      body: "Se encontraron problemas con los siguientes campos:"
+      header:
+        one: "No se pudo guardar este %{model} debido a 1 error."
+        other: "No se pudo guardar este %{model} debido a %{count} errores."
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}" # Asegurada su correcta ubicación
+    models:
+      admin_user:
+        one: "Usuario Administrador"
+        other: "Usuarios Administradores"
+      client:
+        one: "Cliente"
+        other: "Clientes"
+      employee:
+        one: "Empleado"
+        other: "Empleados"
+      expense:
+        one: "Gasto"
+        other: "Gastos"
+      order:
+        one: "Pedido"
+        other: "Pedidos"
+      order_product:
+        one: "Producto del Pedido"
+        other: "Productos del Pedido"
+      payment_method:
+        one: "Método de Pago"
+        other: "Métodos de Pago"
+      product:
+        one: "Producto"
+        other: "Productos"
+      provider:
+        one: "Proveedor"
+        other: "Proveedores"
+      supply:
+        one: "Insumo"
+        other: "Insumos"
+      supply_inventory:
+        one: "Inventario de Insumo"
+        other: "Inventarios de Insumos"
+    attributes:
+      id: "ID"
+      created_at: "Fecha de Creación"
+      updated_at: "Última Modificación"
+      admin_user:
+        email: "Correo Electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar Contraseña"
+        remember_me: "Recordarme"
+        name: "Nombre"
+      client:
+        name: "Nombre Completo"
+        phone: "Teléfono"
+        email: "Correo Electrónico"
+        address: "Dirección"
+        status: "Estado"
+      employee:
+        name: "Nombre Completo"
+        phone: "Teléfono"
+        email: "Correo Electrónico"
+      expense:
+        name: "Concepto del Gasto"
+        description: "Descripción Detallada"
+        amount: "Monto (COP)"
+        paid_at: "Fecha de Pago"
+        invoice: "Nº Factura/Recibo"
+        status: "Estado del Gasto"
+        admin_user: "Registrado por"
+        payment_method: "Forma de Pago"
+        provider: "Proveedor Asociado"
+        expense_date: "Fecha del Gasto"
+      order:
+        client: "Cliente Registrado"
+        client_name: "Nombre Cliente (Ocasional)"
+        payment_method: "Método de Pago"
+        status: "Estado del Pedido"
+        total: "Total Pedido (COP)"
+        order_date: "Fecha del Pedido"
+        employee: "Atendido por"
+        order_products: "Productos del Pedido"
+      order_product:
+        product: "Producto"
+        units: "Unidades"
+        price: "Precio Unit. (COP)"
+        total: "Subtotal Línea (COP)"
+        status: "Estado Ítem"
+      payment_method:
+        name: "Nombre del Método"
+      product:
+        name: "Nombre del Producto"
+        price: "Precio Venta (COP)"
+        is_taco: "¿Es Taco?" # Aunque ya no lo uses, lo dejo por si acaso o para otros modelos
+        position: "Posición/Orden"
+        description: "Descripción del Producto"
+      provider:
+        name: "Nombre del Proveedor"
+        phone: "Teléfono de Contacto"
+        email: "Email de Contacto"
+        address: "Dirección Principal"
+      supply:
+        name: "Nombre del Insumo"
+        unit: "Unidad de Medida"
+        status: "Estado del Insumo" # Añadido para consistencia si Supply tiene status
+      supply_inventory:
+        supply: "Insumo"
+        units: "Cantidad en Inventario"
+        operation: "Tipo de Operación"
+        cost: "Costo Unitario (COP)"
+        status: "Estado del Inventario"
+
+  devise:
+    confirmations:
+      confirmed: "Tu dirección de correo electrónico ha sido confirmada exitosamente."
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo confirmar tu dirección de correo en unos minutos."
+      send_paranoid_instructions: "Si tu dirección de correo electrónico existe en nuestra base de datos, recibirás un correo con instrucciones sobre cómo confirmarla en unos minutos."
+    failure:
+      already_authenticated: "Ya estás conectado."
+      inactive: "Tu cuenta aún no ha sido activada."
+      invalid: "Correo electrónico o contraseña inválidos."
+      locked: "Tu cuenta está bloqueada."
+      last_attempt: "Tienes un intento más antes de que tu cuenta sea bloqueada."
+      not_found_in_database: "Correo electrónico o contraseña inválidos."
+      timeout: "Tu sesión ha expirado. Por favor, inicia sesión de nuevo para continuar."
+      unauthenticated: "Necesitas iniciar sesión o registrarte antes de continuar."
+      unconfirmed: "Debes confirmar tu dirección de correo electrónico antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrucciones de Confirmación - Chingon" # Ajustado a Chingon
+      reset_password_instructions:
+        subject: "Instrucciones para Restablecer Contraseña - Chingon"
+      unlock_instructions:
+        subject: "Instrucciones de Desbloqueo - Chingon"
+      email_changed:
+        subject: "Correo Electrónico Modificado - Chingon"
+      password_change:
+        subject: "Contraseña Modificada - Chingon"
+    omniauth_callbacks:
+      failure: "No pudimos autenticarte desde %{kind} debido a: \"%{reason}\"."
+      success: "Autenticado exitosamente desde la cuenta %{kind}."
+    passwords:
+      no_token: "No puedes acceder a esta página sin provenir de un correo de restablecimiento de contraseña. Si vienes de un correo de restablecimiento, asegúrate de usar la URL completa."
+      send_instructions: "Recibirás un correo electrónico con instrucciones sobre cómo restablecer tu contraseña en unos minutos."
+      send_paranoid_instructions: "Si tu correo existe en nuestra base de datos, recibirás un enlace para recuperar tu contraseña en unos minutos."
+      updated: "Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión."
+      updated_not_active: "Tu contraseña ha sido cambiada exitosamente."
+    registrations:
+      destroyed: "¡Adiós! Tu cuenta ha sido cancelada. Esperamos verte de nuevo pronto."
+      signed_up: "¡Bienvenido! Te has registrado exitosamente."
+      signed_up_but_inactive: "Te registraste exitosamente, pero no pudimos iniciar tu sesión porque tu cuenta no está activada."
+      signed_up_but_locked: "Te registraste exitosamente, pero no pudimos iniciar tu sesión porque tu cuenta está bloqueada."
+      signed_up_but_unconfirmed: "Se ha enviado un mensaje con un enlace de confirmación a tu correo. Por favor, sigue el enlace para activar tu cuenta."
+      update_needs_confirmation: "Actualizaste tu cuenta exitosamente, pero necesitamos verificar tu nuevo correo. Revisa tu email y sigue el enlace de confirmación."
+      updated: "Tu cuenta ha sido actualizada exitosamente."
+    sessions:
+      signed_in: "Sesión iniciada exitosamente."
+      signed_out: "Sesión cerrada exitosamente."
+      new:
+        sign_in: "Iniciar Sesión"
+        remember_me: "Recordarme"
+    unlocks:
+      send_instructions: "Recibirás un correo con instrucciones sobre cómo desbloquear tu cuenta en unos minutos."
+      send_paranoid_instructions: "Si tu cuenta existe, recibirás un correo con instrucciones sobre cómo desbloquearla en unos minutos."
+      unlocked: "Tu cuenta ha sido desbloqueada exitosamente. Por favor, inicia sesión para continuar."
+    shared:
+      links:
+        sign_in: "Iniciar sesión"
+        forgot_your_password: "¿Olvidaste tu contraseña?"
+        create_an_account: "Crear una cuenta nueva"
+        confirmation_instructions: "¿No recibiste las instrucciones de confirmación?"
+        unlock_instructions: "¿No recibiste las instrucciones de desbloqueo?"
+        sign_in_with_provider: "Iniciar sesión con %{provider}"
+        or: "o"
+
+  active_admin:
+    dashboard: "Tablero Principal"
+    site_title: "Chingon - Administración" # Ajustado a Chingon
+    logout: "Cerrar Sesión"
+    login: "Acceso Admin"
+    powered_by: "Desarrollado con Active Admin %{version}"
+    new_model: "Nuevo/a %{model}"
+    edit_model: "Editar %{model}"
+    delete_model: "Eliminar %{model}"
+    view: "Ver"
+    edit: "Editar"
+    delete: "Eliminar"
+    delete_confirmation: "¿Estás seguro de que quieres eliminar este elemento?"
+    filters:
+      buttons:
+        filter: "Filtrar"
+        clear_filters: "Limpiar Filtros"
+    batch_actions:
+      button_label: "Acciones en Lote"
+      default_action_confirm: "¿Estás seguro de ejecutar esta acción sobre los elementos seleccionados?"
+      delete_confirmation: "¿Estás seguro de que quieres eliminar los %{plural_model} seleccionados?"
+      succesfully_destroyed: # O successfully_destroyed
+        one: "Se eliminó 1 %{model}."
+        other: "Se eliminaron %{count} %{plural_model}."
+    comments:
+      title: "Comentarios"
+      add: "Añadir Comentario"
+      no_comments_yet: "No hay comentarios aún."
+      resource_type: "Tipo de Recurso"
+      author_type: "Tipo de Autor"
+      body: "Comentario"
+      author: "Autor"
+    scopes:
+      all: "Todos"
+    pagination:
+      first: "&laquo; Primero"
+      last: "Último &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "…"
+      entry:
+        one: 'Mostrando 1 %{model_name}'
+        other: 'Mostrando %{count} %{model_name_plural}'
+        zero: 'No se encontraron %{model_name_plural}'
+      more_pages:
+        display_entries: 'Mostrando %{entry_name_plural} <b>%{first}&nbsp;-&nbsp;%{last}</b> de un total de <b>%{total}</b>'
+    blank_slate:
+      content: "Aún no hay ningún %{resource_name}."
+      link: "Crear un nuevo %{resource_name}"
+    devise:
+      login:
+        title: "Acceso al Panel de Administración"
+        remember_me: "Recordarme en este equipo"
+        submit: "Ingresar"
+      registrations:
+        title: "Registrar Administrador"
+        submit: "Registrar"
+      passwords:
+        title: "Recuperar Contraseña de Administrador"
+        submit: "Enviar Instrucciones"
+
+  ui_elements:
+    access: "Panel de Control"
+    configurations: "Configuraciones"
+    dashboard: "Tablero Principal"
+    date_range_selector: "Selector de Rango de Fechas"
+    start_date: "Fecha Inicio:"
+    end_date: "Fecha Fin:"
+    submit_button: "Aplicar Filtro"
+    todays_cashbox: "Caja del Día"
+    clients: "Clientes"
+    comments: "Comentarios"
+    employees: "Empleados"
+    expenses: "Gastos"
+    inventory: "Gestión de Inventario"
+    supply_inventories: "Movimientos de Inventario"
+    orders: "Pedidos"
+    payment_methods: "Métodos de Pago"
+    products: "Productos"
+    providers: "Proveedores"
+    supplies: "Insumos"
+    users: "Usuarios App"
+    admin_users: "Administradores del Panel"
+
+  buttons:
+    submit: "Guardar"
+    filter: "Filtrar"
+    cancel: "Cancelar"
+    new: "Nuevo"
+    edit: "Editar"
+    delete: "Eliminar"
+    back: "Volver"
+    sign_in: "Ingresar"
+
+  active_admin_custom:
+    panels:
+      date_range_selector: "Filtrar por Fechas"
+      sales: "Ventas Totales del Periodo"
+      clients: "Clientes Únicos Atendidos"
+      tacos: "Tacos Vendidos en el Periodo"
+      broths: "Caldos Vendidos en el Periodo"
+      beers: "Cervezas Vendidas en el Periodo"
+      sodas: "Refrescos Vendidos en el Periodo"
+      general_settings: "Configuración General del Sistema"
+    labels:
+      date_1: "Desde: "
+      date_2: "Hasta: "

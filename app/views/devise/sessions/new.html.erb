@@ -1,0 +1,42 @@
+<%# app/views/devise/sessions/new.html.erb %>
+<%# Envolvemos todo en los contenedores que el CSS espera %>
+<div class="login-container wajaca-style">
+  <div class="login-box">
+
+    <%# Tu título - lo internacionalizamos como en los ejemplos de Devise %>
+    <h2><%= t("devise.sessions.new.sign_in", default: "Log in") %></h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "login-form" }) do |f| %>
+      <div class="field">
+        <%# Internacionalizamos la etiqueta y añadimos clase al input %>
+        <%= f.label :email, t("activerecord.attributes.#{resource_name}.email", default: "Email") %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%# Internacionalizamos la etiqueta y añadimos clase al input %>
+        <%= f.label :password, t("activerecord.attributes.#{resource_name}.password", default: "Password") %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-input" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field remember-me"> <%# Clase 'remember-me' añadida para el estilo específico %>
+          <%= f.check_box :remember_me %>
+          <%# Internacionalizamos la etiqueta %>
+          <%= f.label :remember_me, t("devise.sessions.new.remember_me", default: "Remember me") %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%# Añadimos clase al botón e internacionalizamos el texto %>
+        <%= f.submit t("devise.sessions.new.sign_in", default: "Log in"), class: "btn btn-login" %>
+      </div>
+    <% end %>
+
+    <%# Envolvemos los shared_links para aplicarles estilo %>
+    <div class="login-links">
+      <%= render "devise/shared/links" %>
+    </div>
+
+  </div>
+</div>

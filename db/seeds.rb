@@ -1,66 +1,69 @@
-# Limpia tablas antes de insertar datos nuevos
-Employee.destroy_all
-PaymentMethod.destroy_all
-Supplier.destroy_all
-Product.destroy_all
-Order.destroy_all
-OrderProduct.destroy_all
-Expense.destroy_all
-Supply.destroy_all
-SupplyInventory.destroy_all
+require 'faker'
+require 'securerandom'
 
-# Empleados
-Employee.create!([
-  { name: "Juan Pérez", phone: "3001234567", email: "juan@chingon.com" },
-  { name: "Luisa Gómez", phone: "3109876543", email: "luisa@chingon.com" }
-])
+Payment.destroy_all
+Debt.destroy_all
+Client.destroy_all
+AdminUser.destroy_all
+User.destroy_all
+puts "Limpiando tablas para el reporte PDF..."
 
-# Métodos de pago
-PaymentMethod.create!([
-  { name: "Efectivo" },
-  { name: "Tarjeta de crédito" },
-  { name: "Transferencia" }
-])
+puts "\nCreando Usuarios Administradores y Clientes de ejemplo..."
+15.times do |i|
+  a = AdminUser.new(
+    email: "#{i}-#{Faker::Internet.unique.email}",
+    password: "password123",
+    password_confirmation: "password123",
+    name: Faker::Name.name,
+    phone: Faker::PhoneNumber.phone_number
+  )
+  a.save
+  puts "Usuario administrador #{a.id} creado con éxito #{a.email}"
+end
 
-# Suplidores
-Supplier.create!([
-  { name: "Frutas El Paraíso", phone: "3123456789", email: "frutas@proveedor.com" },
-  { name: "Carnes Don Lucho", phone: "3012345678", email: "carnes@proveedor.com" }
-])
+puts "Iniciando Creación de 15 Usuarios..."
+15.times do
+  u = User.new(
+    name: Faker::Name.name,
+    lastname: Faker::Name.last_name
+  )
+  u.save
+  puts "Usuario #{u.id} creado con éxito #{u.name} #{u.lastname}"
+end
+puts "Terminado Creación de 15 Usuarios"
+puts "Iniciando Creación de 10 Clientes..."
+10.times do |i|
+  c = Client.new(
+    name: "#{Faker::Name.name}",
+    phone: "3#{Faker::Number.number(digits: 9)}",
+    email: "#{i}-#{Faker::Internet.unique.email}",
+    status: [0, 1, 2, 3].sample
+  )
+  c.save
+  puts "Cliente #{c.id} creado con éxito #{c.name} #{c.phone} #{c.email} #{c.status}"
+end
+puts "Terminado Creación de 10 Clientes"
 
-# Productos
-Product.create!([
-  { name: "Hamburguesa", price: 18000 },
-  { name: "Salchipapa", price: 12000 },
-  { name: "Perro Caliente", price: 10000 }
-])
+puts "Iniciando Creación de 10 Deudas..."
+10.times do |i|
+  d = Debt.new(
+    client_id: Client.pluck(:id).sample,
+    user_id: User.pluck(:id).sample,
+    installments: [12, 24, 36, 48, 60].sample,
+    due_day: [1, 15, 30].sample,
+    start_at: Date.today,
+    end_at: Date.today + [12, 24, 36, 48, 60].sample.months,
+    interest_rate: 0.1,
+    amount: [1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000].sample,
+    quota: [100000, 200000, 300000, 400000, 500000].sample,
+    currency: "COP",
+    token: SecureRandom.hex(10),
+    status: [0, 1, 2].sample,
+    admin_user_id: AdminUser.pluck(:id).sample
+  )
+  d.save
+  puts "Deuda #{d.id} creada con éxito #{d.client_id} #{d.user_id} #{d.installments} #{d.due_day} #{d.start_at} #{d.end_at} #{d.interest_rate} #{d.amount} #{d.quota} #{d.currency} #{d.token} #{d.status}"
+end
+puts "Terminado Creación de 10 Deudas"
 
-# Pedidos
-order1 = Order.create!(status: 1, total: 30000) # status: 1 = pagado
-order2 = Order.create!(status: 0, total: 18000) # status: 0 = pendiente
-
-# Productos por pedido
-OrderProduct.create!([
-  { order: order1, product_id: Product.first.id, quantity: 1 },
-  { order: order1, product_id: Product.last.id, quantity: 1 },
-  { order: order2, product_id: Product.first.id, quantity: 1 }
-])
-
-# Gastos
-Expense.create!([
-  { supplier_id: Supplier.first.id, amount: 8000, description: "Compra de tomates" },
-  { supplier_id: Supplier.last.id, amount: 20000, description: "Compra de carne" }
-])
-
-# Insumos
-Supply.create!([
-  { name: "Tomate", unit: "kg" },
-  { name: "Pan", unit: "unidades" },
-  { name: "Carne", unit: "kg" }
-])
-
-# Inventario de insumos
-SupplyInventory.create!([
-  { supply_id: Supply.first.id, quantity: 10 },
-  { supply_id: Supply.last.id, quantity: 5 }
-])
+puts "\n¡Seeds mínimos para PDF completados!"

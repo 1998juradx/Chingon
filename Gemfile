@@ -15,8 +15,13 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "sassc-rails"
 gem 'faker'
+gem 'prawn'
+gem 'prawn-table'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
+  gem 'pry', '~> 0.15.2'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
@@ -29,22 +34,17 @@ group :test do
   gem "selenium-webdriver"
 end
 
-#ADMIN
 gem 'activeadmin'
+gem 'devise'
 gem 'activeadmin_addons'
 gem 'arctic_admin'
 gem 'cancan'
 gem 'cancancan'
 gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
 
-#GRAPHS
 gem 'groupdate'
 gem "chartkick"
 
-#SESSION
-gem 'devise'
-
-#ERRORS
 gem "sentry-ruby"
 gem "sentry-rails"
 
@@ -58,3 +58,5 @@ gem 'materialize-sass', '~> 1.0.0'
 gem 'font_awesome5_rails'
 
 gem 'rabl'
+
+gem "tailwindcss-rails", "~> 4.2"
